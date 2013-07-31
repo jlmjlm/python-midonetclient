@@ -387,7 +387,7 @@ class EnumAttr(SingleAttr):
 
     def _cli_to_api(self, value):
         for k,v in self.mappings.items():
-            if v == value:
+            if v == value or k == value:
                 return k
         return None
 
