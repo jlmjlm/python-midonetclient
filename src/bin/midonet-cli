@@ -1701,6 +1701,20 @@ class TraceCondition(Condition):
     def type_name(self):
         return "tcond"
 
+class Trace(ObjectType):
+    def type_name(self):
+        return "trace"
+
+    def __init__(self, obj):
+        ObjectType.__init__(self, obj)
+        self.clear_attrs()
+        self.put_attr(Collection(name = 'index',
+                                 element_type = Trace,
+                                 list_method = 'get_trace_ids'))
+        self.put_attr(SingleAttr(name = 'messages',
+                                 value_type = StringType(),
+                                 getter = 'get_trace_messages'))
+
 class Midonet(ObjectType):
     """ This is the root context for the CLI. At the beggining of matchin on a
         command pattern the `MatchingContext` is initialized with an instance of
